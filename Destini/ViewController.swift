@@ -33,15 +33,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var topButton: UIButton!         // Has TAG = 1
     @IBOutlet weak var bottomButton: UIButton!      // Has TAG = 2
     @IBOutlet weak var storyTextView: UILabel!
+    @IBOutlet weak var restartButton: UIButton!
     
     var storyIndex: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        storyTextView.text = story1
-        topButton.setTitle(answer1a, for: .normal)
-        bottomButton.setTitle(answer1b, for: .normal)
+        restart()
     }
 
     
@@ -55,9 +54,8 @@ class ViewController: UIViewController {
                 storyIndex = 3
             } else if storyIndex == 3 {
                 storyTextView.text = story6
-                topButton.isHidden = true
-                bottomButton.isHidden = true
                 storyIndex = 6
+                switchButtons()
             }
         } else if sender.tag == 2 {
             if storyIndex == 1 {
@@ -67,15 +65,33 @@ class ViewController: UIViewController {
                 storyIndex = 2
             } else if storyIndex == 2 {
                 storyTextView.text = story4
-                topButton.isHidden = true
-                bottomButton.isHidden = true
                 storyIndex = 4
+                switchButtons()
             } else if storyIndex == 3 {
                 storyTextView.text = story5
-                topButton.isHidden = true
-                bottomButton.isHidden = true
                 storyIndex = 5
+                switchButtons()
             }
         }
+    }
+    
+    @IBAction func restart(_ sender: UIButton) {
+        restart()
+    }
+    
+    func restart() {
+        storyIndex = 1
+        storyTextView.text = story1
+        topButton.setTitle(answer1a, for: .normal)
+        bottomButton.setTitle(answer1b, for: .normal)
+        restartButton.isHidden = true
+        topButton.isHidden = false
+        bottomButton.isHidden = false
+    }
+    
+    func switchButtons() {
+        topButton.isHidden = true
+        bottomButton.isHidden = true
+        restartButton.isHidden = false
     }
 }
